@@ -24,6 +24,7 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`
 const index = require('./routes/index')
 app.use('/', index)
 
+// authRouter needs to be added so paste the following lines:
 const authRouter = require('./routes/auth.routes')
 app.use('/', authRouter)
 
