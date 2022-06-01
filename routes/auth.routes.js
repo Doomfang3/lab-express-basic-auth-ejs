@@ -1,11 +1,9 @@
-// const res = require("express/lib/response");
-
 const router = require("express").Router()
 const mongoose = require('mongoose')
 const bcryptjs = require('bcryptjs')
-const saltRounds = 10
-
 const User = require('../models/User.model')
+
+const saltRounds = 10
 
 
 //GET signup page
@@ -67,7 +65,7 @@ router.post('/signup', (req, res, next) => {
                 // console.log('Newly created user is: ', userFromDB)
                 res.redirect('/userProfile')
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error instanceof mongoose.Error.ValidationError) {
                     res.status(500).render('auth/signup', { errorMessage: error.message })
                 } else if (error.code === 11000) {

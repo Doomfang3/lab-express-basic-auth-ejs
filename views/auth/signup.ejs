@@ -17,7 +17,7 @@
         <button type="submit">Create account</button>
 
         <%#!-- error message will be added here --%>
-            <% if(errorMessage) { %>
+            <% if(typeof errorMessage !== 'undefined') { %>
                 <p class="error">
                     <%= errorMessage %>
                 </p>
