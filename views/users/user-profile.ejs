@@ -1,10 +1,12 @@
-<% if(user) { %>
+<% if(userInSession) { %>
     <h2>Welcome,
-        <%= user.username %>!</h2>
+        <%= userInSession.username %>!</h2>
     <p>This is your profile page my friend!</p>
     <button>
-          <a href="/userProfile">Reload the page</a>
-        </button>
+      <a href="/userProfile">Reload the page</a>
+    </button>
     <% } else { %>
-        <p>Still no logged in user, sorry!</p>
+
+        <br>
+        <p>Still no sessionlogged in user, sorry!</p>
         <% } %>
