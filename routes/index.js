@@ -4,6 +4,8 @@ const User = require('../models/User.model.js')
 const bcryptjs = require('bcryptjs')
 const saltRounds = 10;
 
+const { isLoggedIn } = require("../middleware/route-guard");
+
 //const session = require('express-session')
 //const mongoStore = require ('connect-mongo')
  
@@ -63,13 +65,28 @@ router.post("/login", async (req, res) => {
     console.log(check[0].password)
     if (Object.keys(check).length >= 1) {
       if (bcryptjs.compareSync(password, check[0].password)) {
-        res.render('profile', {username});
+        console.log('SESSION =====> ', req.session);
+        req.session.currentUser = check;
+        console.log(req.session.currentUser);
+        res.redirect('/profile');
       } else {res.render('login', { errorMessage: 'Incorrect password.' });}
     }
     }
   catch (error) {
     console.log("logging in the user failed", error)
   }
+})
+
+router.get('/profile', (req, res) => {
+  res.render('profile', { userInSession: req.session.currentUser })
+})
+
+router.get("/main", isLoggedIn, (req, res, next) => {
+  res.render("main", { userInSession: req.session.currentUser });
+})
+
+router.get("/private", isLoggedIn, (req, res, next) => {
+  res.render("private", { userInSession: req.session.currentUser });
 })
 
 module.exports = router;
