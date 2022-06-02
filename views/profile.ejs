@@ -1,4 +1,4 @@
 <% if (userInSession) {%>
 <h1>Profile page</h1>
-<p>Welcome <%= userInSession[0].username %>, nice to see you again!<p>
+<p>Welcome <%= userInSession.username %>, nice to see you again!<p>
     <% } else {%><p>Not logged in, sorry :(</p><% } %>
