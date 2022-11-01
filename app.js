@@ -11,6 +11,8 @@ const express = require('express')
 
 const app = express()
 
+require('./config/session.config')(app);
+
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require('./config')(app)
 
