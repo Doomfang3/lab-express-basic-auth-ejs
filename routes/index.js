@@ -1,3 +1,4 @@
+const { isLoggedIn } = require("../middleware/route-guard");
 const User = require("../models/User.model");
 
 const router = require("express").Router();
@@ -7,8 +8,9 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-router.get("/application", (req, res, next) => {
-  res.render("application");
+router.get("/application", isLoggedIn, (req, res, next) => {
+  console.log(req.session)
+  res.render("application", {user: req.session.user});
 });
 
 module.exports = router;

@@ -49,7 +49,8 @@ router.post("/login", async (req, res, next) => {
     console.log(user);
     if(!!user) {
       if(bcryptjs.compareSync(req.body.password, user.encryptedPass)){
-        res.render('application')
+        req.session.user = user
+        res.redirect('/application')
       } else {
         res.render('auth/login', {errorMessage: 'Wrong Password'})
       }
@@ -58,6 +59,7 @@ router.post("/login", async (req, res, next) => {
     }
   } catch (error) {
     console.log(error)
+    res.render('auth/login', {errorMessage: 'Error occurred. Please try again'})
   }
     
 });
