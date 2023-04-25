@@ -2,11 +2,12 @@
 <form action="/auth/signup" method="POST">
 	<label
 		>User Name:<input name="userName" placeholder="ironhacker" required
-	/></label>
+		value="<%- (!!errorMessage) ? userName : "" %>" /></label
+	>
 	<label>Password:<input name="password" type="password" required /></label>
 	<button type="submit">Sign up</button>
 </form>
 
-<% if(errorMessage){ %>
+<% if(!!errorMessage){ %>
 <p><%- errorMessage %></p>
 <% } %>
