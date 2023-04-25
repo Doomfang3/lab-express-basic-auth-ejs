@@ -10,7 +10,8 @@ router.get("/signup", (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
 	const { userName, password } = req.body;
-	const potentialUser = User.findOne({ userName: userName });
+	const potentialUser = await User.findOne({ userName: userName });
+	console.log(potentialUser);
 
 	try {
 		if (!potentialUser) {
